@@ -40,19 +40,19 @@ class ItemsActivity : AppCompatActivity(), OnItemClicked {
             }
             ItemsStatus.SUCCESS_DATA -> {
                 binding.itemsActivityLoader.visibility = View.GONE
-                showCharacterData(data.peekContent().data as List<ItemEntity>)
+                showItemsData(data.peekContent().data as List<ItemEntity>)
             }
             ItemsStatus.ERROR -> {
                 binding.itemsActivityLoader.visibility = View.GONE
                 showErrorModal(data.peekContent().error?.message.orEmpty())
             }
             ItemsStatus.OPEN_ITEM_DETAIL -> {
-                openCharacterDetail(data.peekContent().data as ItemEntity)
+                openItemsDetail(data.peekContent().data as ItemEntity)
             }
         }
     }
 
-    private fun showCharacterData(data: List<ItemEntity>) {
+    private fun showItemsData(data: List<ItemEntity>) {
 
         binding.itemsActivityLoader.visibility = View.GONE
         itemsAdapter.submitList(data)
@@ -60,7 +60,7 @@ class ItemsActivity : AppCompatActivity(), OnItemClicked {
         binding.itemsActivityRecyclerView.adapter = itemsAdapter
     }
 
-    private fun openCharacterDetail(item: ItemEntity) {
+    private fun openItemsDetail(item: ItemEntity) {
         val dialog = ItemDetailDialogFragment.newInstance(item)
         dialog.show(supportFragmentManager, "TAG")
     }
